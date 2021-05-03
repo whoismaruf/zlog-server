@@ -1,1 +1,29 @@
-### Get 
+
+### Get Blogs
+GET http://127.0.0.1:8000/api/blog
+Authorization: Token c883a8a2732023db5e8209b9fbcf56b01c7b3381
+
+
+### Login
+POST http://127.0.0.1:8000/api/auth/token/login
+Content-Type: application/json
+
+{
+    "username": "maruf",
+    "password": "2323"
+}
+
+
+### Get Users
+GET http://127.0.0.1:8000/api/auth/users/me
+Authorization: Token 4cb7945c1a7f131525812894d148a122f2e59bb4
+
+
+### Edit account
+PUT http://127.0.0.1:8000/api/auth/users/me/
+Content-Type: application/json
+Authorization: Token 4cb7945c1a7f131525812894d148a122f2e59bb4
+
+{
+    "username": "test2"
+}
