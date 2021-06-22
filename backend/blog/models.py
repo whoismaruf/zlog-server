@@ -8,6 +8,9 @@ from django.utils.text import slugify
 
 
 class Blog(models.Model):
+    ''' Blog Models to save blogs by user. \n
+    
+    '''
     title = models.CharField(max_length=500)
     body = models.TextField()
     slug = models.SlugField(blank=True)
