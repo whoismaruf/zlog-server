@@ -5,7 +5,7 @@ from root.permissions import AuthorPermission
 
 
 class BlogView(generics.ListCreateAPIView):
-    queryset = Blog.objects.all()
+    queryset = Blog.objects.all().order_by('-created_at')
     serializer_class = BlogSerializer
 
     def perform_create(self, serializer):
@@ -21,6 +21,6 @@ class BlogDetailView(generics.RetrieveUpdateDestroyAPIView):
 class AuthorsBlogView(generics.ListAPIView):
 
     def get_queryset(self):
-        return Blog.objects.all().filter(author=self.request.user)
+        return Blog.objects.all().filter(author=self.request.user).order_by('-created_at')
     serializer_class = BlogSerializer
     permission_classes = (AuthorPermission,)
