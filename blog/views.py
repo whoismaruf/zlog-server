@@ -21,6 +21,9 @@ class BlogDetailView(generics.RetrieveUpdateDestroyAPIView):
 class AuthorsBlogView(generics.ListAPIView):
 
     def get_queryset(self):
-        return Blog.objects.all().filter(author=self.request.user).order_by('-created_at')
+        return Blog.objects.all().filter(
+            author=self.request.user
+        ).order_by('-created_at')
+
     serializer_class = BlogSerializer
     permission_classes = (AuthorPermission,)
