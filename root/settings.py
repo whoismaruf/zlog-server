@@ -18,11 +18,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, False),
+    PRODUCTION=(bool, False),
+    PG_NAME=(str, None),
+    PG_USER=(str, None),
+    PG_PASSWORD=(str, None),
+    PG_HOST=(str, None),
+    PG_PORT=(str, None),
+    CORS_ALLOWED_ORIGINS=(list, ["http://127.0.0.1:8000", "http://localhost:8080"])
 )
 # reading .env file
 environ.Env.read_env()
-
+print(env('CORS_ALLOWED_ORIGINS'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -59,12 +66,10 @@ INSTALLED_APPS = [
     'blog',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-    "http://localhost:3000",
-    "http://127.0.0.1:8000",
-    "http://127.0.0.1:3000",
-]
+
+# CORS Settings
+
+CORS_ALLOWED_ORIGINS = env('CORS_ALLOWED_ORIGINS')
 CORS_ALLOW_METHODS = [
     'DELETE',
     'GET',
@@ -143,12 +148,31 @@ WSGI_APPLICATION = 'root.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+DATABASES_CONFIG = {
+    'sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    },
+    'postgres': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('PG_NAME'),
+        'USER': env('PG_USER'),
+        'PASSWORD': env('PG_PASSWORD'),
+        'HOST': env('PG_HOST'),
+        'PORT': env('PG_PORT'),
     }
 }
+
+if env('PRODUCTION'):
+    DATABASES = {
+        'default': DATABASES_CONFIG['postgres']
+    }
+else:
+    DATABASES = {
+        'default': DATABASES_CONFIG['sqlite']
+    }
+
+print(DATABASES['default'])
 
 
 # Password validation
