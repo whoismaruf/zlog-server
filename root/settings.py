@@ -29,7 +29,7 @@ env = environ.Env(
 )
 # reading .env file
 environ.Env.read_env()
-print(env('CORS_ALLOWED_ORIGINS'))
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -38,7 +38,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
-print(DEBUG)
+
 ALLOWED_HOSTS = [env('ALLOWED_HOSTS')]
 
 
@@ -172,7 +172,6 @@ else:
         'default': DATABASES_CONFIG['sqlite']
     }
 
-print(DATABASES['default'])
 
 
 # Password validation
