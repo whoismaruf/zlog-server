@@ -25,7 +25,9 @@ env = environ.Env(
     PG_PASSWORD=(str, None),
     PG_HOST=(str, None),
     PG_PORT=(str, None),
-    CORS_ALLOWED_ORIGINS=(list, ["http://127.0.0.1:8000", "http://localhost:8080"])
+    CORS_ALLOWED_ORIGINS=(list, [
+        "http://127.0.0.1:8000", "http://localhost:8080"
+    ])
 )
 # reading .env file
 environ.Env.read_env()
@@ -51,7 +53,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # Packages
     'corsheaders',
     'rest_framework',
@@ -123,7 +125,9 @@ TEMPLATES = [
 # Settings for REST Framework
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated'],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ],
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
     ),
@@ -173,22 +177,25 @@ else:
     }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
