@@ -1,6 +1,7 @@
 from rest_framework import generics
 from blog.models import Blog
-from blog.serializers import BlogSerializer
+from django.contrib.auth.models import User
+from blog.serializers import BlogSerializer, AuthorSerializer
 from root.permissions import AuthorPermission
 
 
@@ -26,4 +27,10 @@ class AuthorsBlogView(generics.ListAPIView):
         ).order_by('-created_at')
 
     serializer_class = BlogSerializer
+    permission_classes = (AuthorPermission,)
+
+
+class AuthorDetailsView(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = AuthorSerializer
     permission_classes = (AuthorPermission,)
