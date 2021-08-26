@@ -1,5 +1,3 @@
-from django.http import request
-from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
@@ -9,7 +7,7 @@ from django.utils.text import slugify
 
 class Blog(models.Model):
     ''' Blog Models to save blogs by user. \n
-    
+
     '''
     title = models.CharField(max_length=500)
     body = models.TextField()
